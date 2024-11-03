@@ -1,0 +1,28 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.root {
+  cursor: pointer;
+
+  position: relative;
+
+  display: inline-flex;
+  flex-shrink: 0;
+
+  width: 16px;
+  height: 16px;
+}
+
+.label {
+  cursor: pointer;
+
+  flex-grow: 1;
+
+  font-family: var(--font-family), serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 140%;
+  color: var(--white-white-2);
+}
