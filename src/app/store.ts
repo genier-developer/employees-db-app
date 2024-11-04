@@ -1,5 +1,5 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {employeeSlice} from '../entities/employee/api/employee-slice.ts'
+import {employeeSlice} from "../entities/employee/model/employee-slice.ts";
 
 const reducer = combineReducers({
   employee: employeeSlice.reducer,
