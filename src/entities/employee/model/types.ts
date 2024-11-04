@@ -4,5 +4,5 @@ export type EmployeeResponseData = {
   isArchive: boolean,
   role: string,
   phone: string,
-  birthday: string
+  birthday: string,
 }

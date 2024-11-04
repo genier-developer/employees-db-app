@@ -1,13 +1,11 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {employeeSlice} from "../entities/employee/model/employee-slice.ts";
+import {employeeSlice} from "../entities/employee";
 
 const reducer = combineReducers({
   employee: employeeSlice.reducer,
 })
 export const store = configureStore({
-  reducer: {
     reducer,
-  },
 })
 
 export type RootState = ReturnType<typeof store.getState>
