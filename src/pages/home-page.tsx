@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {fetchEmployees} from "../entities/employee/model/employee-slice.ts";
 
 export const HomePage = () => {
-  const dispatch  = useAppDispatch()
+  const dispatch = useAppDispatch();
   const {employees, loading, error} = useAppSelector(state => state.employee)
 
   useEffect(()=>{
@@ -22,7 +22,6 @@ export const HomePage = () => {
           <p>{employee.phone}</p>
         </div>
       ))}
-
     </div>
   )
 }
