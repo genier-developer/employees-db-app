@@ -14,7 +14,7 @@ const initialState: EmployeeState = {
 }
 
 export const fetchEmployees = createAsyncThunk('employee/fetchEmployees', async ()=>{
-  const response = await fetch('/employees-db-app/db/employees.json')
+  const response = await fetch('/db/employees.json')
   if(!response.ok){
     throw new Error("failed to fetch Employees from DB")
   }
