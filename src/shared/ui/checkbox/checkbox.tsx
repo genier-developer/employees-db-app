@@ -1,18 +1,43 @@
-import {Root, Indicator} from "@radix-ui/react-checkbox";
-import { CheckIcon } from "@radix-ui/react-icons";
-import s from "./checkbox.module.scss"
+import { forwardRef, ReactNode, useId } from 'react';
 
-export const Checkbox = () => (
-  <form>
-    <div className={s.checkbox}>
-      <Root className="CheckboxRoot" defaultChecked id="c1">
-        <Indicator className="CheckboxIndicator">
-          <CheckIcon />
-        </Indicator>
-      </Root>
-      <label className="Label" htmlFor="c1">
-        Accept terms and conditions.
-      </label>
-    </div>
-  </form>
+import { Indicator, Root } from '@radix-ui/react-checkbox';
+
+import s from './checkbox.module.scss';
+
+import {CheckIcon} from "@radix-ui/react-icons";
+
+type CheckboxProps = {
+  onChangeChecked?: (checked: boolean) => void;
+  isArchive?: boolean;
+  label?: ReactNode | string;
+};
+export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
+  ({onChangeChecked, isArchive = false}, ref) => {
+    const generatedId = useId();
+
+    const handleCheckedChange = (): void => {
+      if (onChangeChecked) {
+        onChangeChecked(!isArchive);
+      }
+    };
+
+    return (
+      <div className={s.checkbox} ref={ref}>
+        <Root
+          onCheckedChange={handleCheckedChange}
+          checked={isArchive}
+          className={s.root}
+          id={generatedId}
+          name="checkbox"
+        >
+          <Indicator className={s.indicator}>
+            <CheckIcon />
+          </Indicator>
+        </Root>
+        <label className={s.label} htmlFor={generatedId}>
+          Archive
+        </label>
+      </div>
+    );
+  },
 );
