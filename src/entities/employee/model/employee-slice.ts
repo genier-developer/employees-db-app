@@ -60,5 +60,5 @@ export const employeeSlice = createSlice({
   }
 })
 
-export const {addEmployee, updateEmployee} = employeeSlice.actions;
+export const {addEmployee, updateEmployee, employeeToggleArchiveStatus} = employeeSlice.actions;
 export default employeeSlice.reducer

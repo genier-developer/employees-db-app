@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../app/store.ts";
 import {useEffect} from "react";
-import {fetchEmployees} from "../../entities/employee/model/employee-slice.ts";
-import {Checkbox} from "../../shared/ui/checkbox/checkbox.tsx";
+import {employeeToggleArchiveStatus, fetchEmployees} from "../../entities/employee/model/employee-slice.ts";
+import {CheckboxUI} from "../../shared/ui/checkbox";
 import s from './home.module.scss'
 
 export const HomePage = () => {
@@ -11,6 +11,11 @@ export const HomePage = () => {
   useEffect(()=>{
     dispatch(fetchEmployees())
   }, [dispatch])
+
+  const handleToggleStatus = (employeeId: number)=>{
+    dispatch(employeeToggleArchiveStatus(employeeId))
+
+  }
 
   if(loading) return <div>Loading...</div>
   if(error) return <div>Error</div>
@@ -22,10 +27,12 @@ export const HomePage = () => {
           <h3>{employee.name}</h3>
           <p>{employee.role}</p>
           <p>{employee.phone}</p>
-          <Checkbox isArchive={employee.isArchive} />
+          <p>{employee.birthday}</p>
+          <CheckboxUI isArchive={employee.isArchive} onChangeChecked={()=>handleToggleStatus(employee.id)}/>
         </div>
       ))}
     </div>
+
   )
 }
 
