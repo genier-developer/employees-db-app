@@ -42,7 +42,7 @@ export const EmployeeTable = () => {
   }));
 
   return (
-    <Box sx={{width: '100%' }}>
+    <Box>
       <DataGrid
         rows={rows}
         columns={columns}
