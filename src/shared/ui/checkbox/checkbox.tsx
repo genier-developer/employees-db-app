@@ -19,7 +19,7 @@ export const CheckboxUI: FC<CheckboxProps> = ({label, onChangeChecked, isArchive
 
   return (
     <FormControlLabel
-      control={<Checkbox onChange={handleChange} checked={isArchive}/>}
+      control={<Checkbox onChange={handleChange} checked={isArchive} />}
       label={label}
     />
   );

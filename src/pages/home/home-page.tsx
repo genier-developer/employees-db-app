@@ -28,7 +28,11 @@ export const HomePage = () => {
           <p>{employee.role}</p>
           <p>{employee.phone}</p>
           <p>{employee.birthday}</p>
-          <CheckboxUI isArchive={employee.isArchive} onChangeChecked={()=>handleToggleStatus(employee.id)}/>
+          <CheckboxUI
+            isArchive={employee.isArchive}
+            onChangeChecked={()=>handleToggleStatus(employee.id)}
+            label={'in archive'}
+          />
         </div>
       ))}
     </div>
