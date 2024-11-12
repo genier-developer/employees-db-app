@@ -1,43 +1,27 @@
-import { forwardRef, ReactNode, useId } from 'react';
-
-import { Indicator, Root } from '@radix-ui/react-checkbox';
-
-import s from './checkbox.module.scss';
-
-import {CheckIcon} from "@radix-ui/react-icons";
+import Checkbox from '@mui/material/Checkbox';
+import {FormControlLabel} from "@mui/material";
+import {FC} from "react";
+import * as React from "react";
 
 type CheckboxProps = {
   onChangeChecked?: (checked: boolean) => void;
   isArchive?: boolean;
-  label?: ReactNode | string;
+  label?: string;
+}
+
+export const CheckboxUI: FC<CheckboxProps> = ({label, onChangeChecked, isArchive}) => {
+  //wrapper for according to type of MUI Checkbox property
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(onChangeChecked){
+      onChangeChecked(event.target.checked);
+    }
+  }
+
+  return (
+    <FormControlLabel
+      control={<Checkbox onChange={handleChange} checked={isArchive}/>}
+      label={label}
+    />
+  );
 };
-export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
-  ({onChangeChecked, isArchive = false}, ref) => {
-    const generatedId = useId();
 
-    const handleCheckedChange = (): void => {
-      if (onChangeChecked) {
-        onChangeChecked(!isArchive);
-      }
-    };
-
-    return (
-      <div className={s.checkbox} ref={ref}>
-        <Root
-          onCheckedChange={handleCheckedChange}
-          checked={isArchive}
-          className={s.root}
-          id={generatedId}
-          name="checkbox"
-        >
-          <Indicator className={s.indicator}>
-            <CheckIcon />
-          </Indicator>
-        </Root>
-        <label className={s.label} htmlFor={generatedId}>
-          Archive
-        </label>
-      </div>
-    );
-  },
-);
