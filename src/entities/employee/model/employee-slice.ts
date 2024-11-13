@@ -3,12 +3,14 @@ import {EmployeeResponseData} from "./types.ts";
 
 export type EmployeeState = {
   employees: EmployeeResponseData[],
+  showArchivedOnly: boolean;
   error: string | null,
   loading: boolean,
 }
 
 const initialState: EmployeeState = {
   employees: [],
+  showArchivedOnly: false,
   error: null,
   loading: false,
 }
@@ -20,6 +22,7 @@ export const fetchEmployees = createAsyncThunk('employee/fetchEmployees', async 
   }
   return await response.json()
 })
+
 export const employeeSlice = createSlice({
   name: "employee",
   initialState,
@@ -41,6 +44,9 @@ export const employeeSlice = createSlice({
       if (employee) {
         employee.isArchive = !employee.isArchive
       }
+    },
+    setShowArchivedOnly: (state, action: PayloadAction<boolean>) => {
+      state.showArchivedOnly = action.payload
     }
   },
   extraReducers: (builder)=>{
@@ -60,5 +66,5 @@ export const employeeSlice = createSlice({
   }
 })
 
-export const {addEmployee, updateEmployee, employeeToggleArchiveStatus} = employeeSlice.actions;
+export const {addEmployee, updateEmployee, employeeToggleArchiveStatus, setShowArchivedOnly} = employeeSlice.actions;
 export default employeeSlice.reducer

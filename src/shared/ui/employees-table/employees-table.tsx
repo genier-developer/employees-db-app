@@ -9,10 +9,14 @@ import {employeeToggleArchiveStatus} from "../../../entities/employee/model/empl
 export const EmployeeTable = () => {
   const dispatch = useAppDispatch();
   const employees = useAppSelector((state) => state.employee.employees);
+  const showArchivedOnly = useAppSelector(state => state.employee.showArchivedOnly)
+
+  const filteredEmployees = employees.filter(employee => !showArchivedOnly || employee.isArchive);
 
   const handleToggleStatus = useCallback((employeeId: number) => {
     dispatch(employeeToggleArchiveStatus(employeeId));
   }, [dispatch]);
+
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70},
     { field: 'name', headerName: 'Name', editable: true, flex: 1 },
@@ -32,7 +36,7 @@ export const EmployeeTable = () => {
     },
   ];
 
-  const rows = employees.map((employee: EmployeeResponseData) => ({
+  const rows = filteredEmployees.map((employee: EmployeeResponseData) => ({
     id: employee.id,
     name: employee.name,
     role: employee.role,
