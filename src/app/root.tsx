@@ -4,7 +4,6 @@ import {HomePage} from "../pages/home/home-page.tsx";
 export default function Root()  {
   return (
     <div>
-      <header>Hello, there is an employee-app</header>
       <HomePage/>
       <Outlet/>
     </div>

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/store';
 import { fetchEmployees } from '../../entities/employee/model/employee-slice';
 import { EmployeeTable } from '../../shared/ui/employees-table';
 import {SelectUI} from "../../shared/ui/select";
-import {EmployeeFilter} from "../../features/employee-filter/ui/employee-filter.tsx";
+import {Header} from "../../widgets/header/header.tsx";
 
 export const HomePage: FC = () => {
   const dispatch = useAppDispatch();
@@ -18,8 +18,8 @@ export const HomePage: FC = () => {
 
   return (
     <div>
+      <Header/>
       <SelectUI />
-      <EmployeeFilter />
       <EmployeeTable />
     </div>
   );
