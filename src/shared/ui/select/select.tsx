@@ -1,28 +1,43 @@
 import Select from '@mui/material/Select';
-import { SelectChangeEvent } from '@mui/material';
+import {FormControl, InputLabel, SelectChangeEvent} from '@mui/material';
 import {MenuItem} from "@mui/material";
-import {useState} from "react";
+import {FC} from "react";
 
+type Option = {
+  value: string;
+  label: string;
+}
 
-// const  role: 'driver'|'cook'|'waiter'
-
-export const SelectUI = () => {
-  const [role, setRole] = useState<string>();
+type SelectUIProps = {
+  label: string;
+  options: Option[];
+  value: string | undefined;
+  onChange: (value: string) => void;
+  fullWidth?: boolean;
+}
+export const SelectUI: FC<SelectUIProps> = ({label, options, value, onChange}) => {
 
   const handleChange = (event: SelectChangeEvent) => {
-    setRole(event.target.value as string);
+    onChange(event.target.value as string);
   }
   return (
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      label="Role"
-      onChange={handleChange}
-      value={role}
-    >
-      <MenuItem value={'driver'}>Driver</MenuItem>
-      <MenuItem value={'cook'}>Cook</MenuItem>
-      <MenuItem value={'waiter'}>Waiter</MenuItem>
-    </Select>
+    <FormControl fullWidth>
+      <InputLabel id="select-label">{label}</InputLabel>
+      <Select
+        // labelId="select-label"
+        id="select"
+        label={label}
+        value={value}
+        onChange={handleChange}
+        displayEmpty
+      >
+        <MenuItem value={''} disabled>
+          {label}
+        </MenuItem>)
+        {options.map(option => <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>)}
+      </Select>
+    </FormControl>
   )
 };
