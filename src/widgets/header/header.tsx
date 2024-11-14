@@ -3,7 +3,10 @@ import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import {EmployeeFilter} from "../../features/employee-filter/ui/employee-filter.tsx";
 
-export const Header: FC = () => {
+type HeaderProps = {
+  onAddEmployeeClick: ()=> void
+}
+export const Header: FC<HeaderProps> = ({onAddEmployeeClick}) => {
   return (
     <header>
       <AppBar
@@ -24,7 +27,9 @@ export const Header: FC = () => {
           </Typography>
           <EmployeeFilter />
           <Button color="inherit"
-                  sx={{textTransform: 'none', fontSize: '15px'}}>
+                  sx={{textTransform: 'none', fontSize: '15px'}}
+                  onClick={onAddEmployeeClick}
+          >
             Add employee
           </Button>
         </Toolbar>
